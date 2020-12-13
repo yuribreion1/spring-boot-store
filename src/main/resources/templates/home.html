@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{base :: head}"></head>
+
+<body class="container">
+
+    <div th:replace="~{base :: logo}"></div>
+
+    <div th:replace="~{base :: jumbotron('Meus pedidos')}"></div>
+
+    <div th:replace="~{base :: navbar}"></div>
+
+    <div class="card card-body mb-5" th:each="pedido : ${pedidos}">
+        <div class="mb-3">
+            <th:block th:switch="${pedido.status.name}">
+                <div th:case="AGUARDANDO" class="alert-warning card-header" th:text="${pedido.nomeProduto}"></div>
+                <div th:case="APROVADO" class="alert-success card-header" th:text="${pedido.nomeProduto}"></div>
+                <div th:case="ENTREGUE" class="alert-dark card-header" th:text="${pedido.nomeProduto}"></div>
+            </th:block>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-8">
+                <div class="row mb-3">
+                    <div class="col-md-5">Valor: <span th:text="${pedido.valorNegociado}"></span></div>
+                    <div class="col-md-7">Data de entrega:</div>
+                </div>
+
+                <div>URL do produto</div>
+                <div><input th:value="${pedido.urlProduto}" type="text" name="nome" class="form-control" readonly></div>
+
+                <div>Descrição</div>
+                <div>
+                    <textarea th:text="${pedido.descricao}" name="descricao" class="form-control" cols="30"
+                        rows="10" readonly></textarea>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4 mb-3">
+                <img th:src="${pedido.urlProdutoImagem}" src="" alt="" srcset="" class="img-thumbnail" readonly>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

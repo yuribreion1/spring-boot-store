@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{base :: head}"></head>
+
+<body class="container">
+
+    <div th:replace="~{base :: logo}"></div>
+
+    
+    <div th:replace="~{base :: jumbotron('Novo pedido')}"></div>
+
+    <div th:replace="~{base :: navbar}"></div>
+
+    <form th:object="${pedidoRequisicao}" method="POST" action="/pedido/novo">
+        <div class="form-group">
+            <label for="nomeProduto">Produto</label>
+            <input th:field="*{nomeProduto}" th:errorclass="is-invalid" type="text" class="form-control" placeholder="iPhone">
+            <small>Informe o nome do produto</small>
+            <div th:errors="*{nomeProduto}" class="invalid-feedback">
+                Campo deve ser preenchido
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="urlProduto">Url do produto</label>
+            <input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{urlProduto}" placeholder="http://loja.com.br">
+            <small>Procure no site o produto que você deseja</small>
+            <div th:errors="*{urlProduto}" class="invalid-feedback">
+                Campo deve ser preenchido
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="urlImagem">Url da imagem</label>
+            <input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{urlImagem}" placeholder="http://loja.com.br/produto/produto.jpg">
+            <small>Informe a link para a imagem do produto</small>
+            <div th:errors="*{urlImagem}" class="invalid-feedback">
+                Campo deve ser preenchido
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="descricaoProduto">Descrição</label>
+            <textarea class="form-control" th:field="*{descricaoProduto}" rows="3"></textarea>
+            <small>Informe mais detalhes do produto, isto ajuda o comprador</small>
+            <div th:errors="*{descricaoProduto}" class="invalid-feedback">
+                Campo deve ser preenchido
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</body>
+
+</html>
